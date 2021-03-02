@@ -93,7 +93,8 @@ export default {
   }
 
   .hideSidebar .fixed-header {
-    width: calc(100% - 54px)
+    /*width: calc(100% - 54px) // 2020.3.2*/
+    width: 100% // 2020.3.2
   }
 
   .mobile .fixed-header {

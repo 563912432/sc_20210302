@@ -1,46 +1,72 @@
 <template>
   <div class="navbar">
     <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
-
-    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
-
+<!--    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />-->
+    <!--当前课程-->
     <div class="right-menu">
-      <template v-if="device!=='mobile'">
-        <search id="header-search" class="right-menu-item" />
+      <div class="menu-left">
+        <i class="el-icon-location-outline" style="font-size: 18px"></i>
+        <span style="font-size: 18px;font-weight: bold">快速设计</span>
+        <span style="font-size: 15px;color: #999999;align-self: flex-end">-设计服务-一般纳税人-3个月</span>
+        <i class="el-icon-arrow-down" style="color: #999999"></i>
+      </div>
+      <div style="display: flex">
+        <div style="display: flex">
+        <span>学习课表</span>
+        <el-dropdown style="margin: 0 20px">
+          <span class="el-dropdown-link" style="font-size: 16px">
+            报税实操<i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item style="font-size: 16px">发票认证</el-dropdown-item>
+            <el-dropdown-item style="font-size: 16px">报税实操</el-dropdown-item>
+            <el-dropdown-item style="font-size: 16px">开票实操</el-dropdown-item>
+            <el-dropdown-item style="font-size: 16px">个税实操</el-dropdown-item>
+            <el-dropdown-item style="font-size: 16px">工商年报</el-dropdown-item>
+            <el-dropdown-item style="font-size: 16px">错账乱账</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+        <span>视频讲解</span>
+        <el-dropdown style="margin: 0 20px">
+          <span class="el-dropdown-link" style="font-size: 16px">
+            财税工具<i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item style="font-size: 16px">各行业税率查询</el-dropdown-item>
+              <el-dropdown-item style="font-size: 16px">会计科目大全</el-dropdown-item>
+              <el-dropdown-item style="font-size: 16px">印花税计算</el-dropdown-item>
+              <el-dropdown-item style="font-size: 16px">车辆购置税计算</el-dropdown-item>
+              <el-dropdown-item style="font-size: 16px">人民币大小写转换</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+      </div>
+        <template v-if="device!=='mobile'">
+          <search id="header-search" class="right-menu-item" />
+          <error-log class="errLog-container right-menu-item hover-effect" />
+          <screenfull id="screenfull" class="right-menu-item hover-effect" />
+          <el-tooltip content="Global Size" effect="dark" placement="bottom">
+            <size-select id="size-select" class="right-menu-item hover-effect" />
+          </el-tooltip>
+        </template>
 
-        <error-log class="errLog-container right-menu-item hover-effect" />
-
-        <screenfull id="screenfull" class="right-menu-item hover-effect" />
-
-        <el-tooltip content="Global Size" effect="dark" placement="bottom">
-          <size-select id="size-select" class="right-menu-item hover-effect" />
-        </el-tooltip>
-
-      </template>
-
-      <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
-        <div class="avatar-wrapper">
-          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
-          <i class="el-icon-caret-bottom" />
-        </div>
-        <el-dropdown-menu slot="dropdown">
-          <router-link to="/profile/index">
-            <el-dropdown-item>Profile</el-dropdown-item>
-          </router-link>
-          <router-link to="/">
-            <el-dropdown-item>Dashboard</el-dropdown-item>
-          </router-link>
-          <a target="_blank" href="https://github.com/PanJiaChen/vue-element-admin/">
-            <el-dropdown-item>Github</el-dropdown-item>
-          </a>
-          <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
-            <el-dropdown-item>Docs</el-dropdown-item>
-          </a>
-          <el-dropdown-item divided @click.native="logout">
-            <span style="display:block;">Log Out</span>
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
+        <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
+          <div class="avatar-wrapper">
+            <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+            <i class="el-icon-caret-bottom" />
+          </div>
+          <el-dropdown-menu slot="dropdown">
+            <router-link to="/profile/index">
+              <el-dropdown-item>个人中心</el-dropdown-item>
+            </router-link>
+            <router-link to="/">
+              <el-dropdown-item>首页</el-dropdown-item>
+            </router-link>
+            <el-dropdown-item divided @click.native="logout">
+              <span style="display:block;">退出登录</span>
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
     </div>
   </div>
 </template>
@@ -113,10 +139,17 @@ export default {
   }
 
   .right-menu {
-    float: right;
+    /*float: right;*/
+    display: flex;
+    justify-content: space-between;
     height: 100%;
     line-height: 50px;
 
+    .menu-left {
+      display: flex;
+      align-items: center;
+      letter-spacing: 1px;
+    }
     &:focus {
       outline: none;
     }
